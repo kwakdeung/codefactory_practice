@@ -15,10 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final PageController pageController = PageController();
 
-  @override
-  void initState() {
-    super.initState(); // 부모 initState() 실행
-
+  void nextPageAnimation() {
     Timer.periodic(
       // Timer.periodic() 등록
       const Duration(seconds: 3),
@@ -42,6 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState(); // 부모 initState() 실행
+    nextPageAnimation();
   }
 
   @override
