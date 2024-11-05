@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  DateTime firstDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +24,36 @@ class HomeScreen extends StatelessWidget {
           // 반대축 최대 크기로 늘리기
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _DDay(),
+            _DDay(
+              onHeartPressed: onHeartPressed,
+              firstDay: firstDay,
+            ),
             _CoupleImage(),
           ],
         ),
       ),
     );
   }
+
+  void onHeartPressed() {
+    setState(() {
+      firstDay = firstDay.subtract(Duration(days: 1));
+    });
+  }
 }
 
 class _DDay extends StatelessWidget {
-  const _DDay({super.key});
+  final GestureTapCallback onHeartPressed;
+  final DateTime firstDay;
+  const _DDay({
+    required this.onHeartPressed,
+    required this.firstDay,
+  });
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final now = DateTime.now();
     return Column(
       children: [
         const SizedBox(height: 16.0),
@@ -45,12 +67,12 @@ class _DDay extends StatelessWidget {
           style: textTheme.bodyLarge,
         ),
         Text(
-          '2021.11.23',
+          '${firstDay.year}.${firstDay.month}.${firstDay.day}',
           style: textTheme.bodyMedium,
         ),
         const SizedBox(height: 16.0),
         IconButton(
-          onPressed: () {},
+          onPressed: onHeartPressed,
           icon: Icon(
             Icons.favorite,
             color: Colors.red,
@@ -59,7 +81,7 @@ class _DDay extends StatelessWidget {
         ),
         const SizedBox(height: 16.0),
         Text(
-          'D+365',
+          'D+${DateTime(now.year, now.month, now.day).difference(firstDay).inDays + 1}',
           style: textTheme.displayMedium,
         ),
       ],
