@@ -23,16 +23,17 @@ flutter:
 
   assets:
     - asset/img/
+    - asset/font/
   #   - images/a_dot_ham.jpeg
 
   fonts:
     - family: parisienne
       fonts:
-        - asset: font/Parisienne-Regular.ttf
+        - asset: asset/font/Parisienne-Regular.ttf
 
     - family: Sunflower
       fonts:
-        - asset: font/Sunflower-Light.ttf
-        - asset: font/Sunflower-Medium.ttf
+        - asset: asset/font/Sunflower-Light.ttf
+        - asset: asset/font/Sunflower-Medium.ttf
           weight: 500
-        - asset: font/Sunflower-Bold.ttf
+        - asset: asset/font/Sunflower-Bold.ttf
