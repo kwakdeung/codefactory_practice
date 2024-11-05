@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,9 +37,26 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onHeartPressed() {
-    setState(() {
-      firstDay = firstDay.subtract(Duration(days: 1));
-    });
+    // setState(() {
+    //   firstDay = firstDay.subtract(Duration(days: 1));
+    // });
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            color: Colors.white,
+            height: 300,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              onDateTimeChanged: (DateTime date) {},
+            ),
+          ),
+        );
+      },
+      barrierDismissible: true,
+    );
   }
 }
 
