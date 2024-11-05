@@ -37,9 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void onHeartPressed() {
-    // setState(() {
-    //   firstDay = firstDay.subtract(Duration(days: 1));
-    // });
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -50,7 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 300,
             child: CupertinoDatePicker(
               mode: CupertinoDatePickerMode.date,
-              onDateTimeChanged: (DateTime date) {},
+              onDateTimeChanged: (DateTime date) {
+                setState(() {
+                  firstDay = date;
+                });
+              },
             ),
           ),
         );
