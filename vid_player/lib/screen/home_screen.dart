@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vid_player/component/custom_video_player.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,7 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget renderVideo() {
     // 동영상 선택 후 보여줄 위젯
-    return Container();
+    return Center(
+      child: CustomVideoPlayer(
+        video: video!, // 선택된 동영상 입력해주기
+      ),
+    );
   }
 }
 
