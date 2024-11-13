@@ -117,20 +117,40 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
               bottom: 0,
               right: 0,
               left: 0,
-              child: Slider(
-                // 동영상 재생 상태를 보여주는 슬라이더
-                onChanged: (double val) {
-                  // seekTo() - 동영상의 재생 위치를 변경 할 수 있게 함으로써 재생 위치를 특정 위치로 이동해줌
-                  videoController!.seekTo(
-                    Duration(seconds: val.toInt()),
-                  );
-                },
-                // 동영상 재생 위치(position)를 초 단위(inSeconds.toDouble())로 표현
-                // position.inSeconds getter를 사용하면 현재 동영상이 실행되고 있는 위치를 받을 수 있음
-                value: videoController!.value.position.inSeconds.toDouble(),
-                min: 0, // Slider 위젯의 min 값은 항상 0 -> 동영상의 시작은 항상 0초부터 시작하기 때문
-                max: videoController!.value.duration.inSeconds
-                    .toDouble(), // Duration으로 동영상 전체 길이를 받아와 inSeconds으로 전체 길이를 초(seconds)로 변환
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    renderTimeTextFromDuration(
+                      // 동영상 현재 위치
+                      videoController!.value.position,
+                    ),
+                    // Expanded를 통해 Slider가 남는 공간을 모두 차지하도록 구현
+                    Expanded(
+                      child: Slider(
+                        // 동영상 재생 상태를 보여주는 슬라이더
+                        onChanged: (double val) {
+                          // seekTo() - 동영상의 재생 위치를 변경 할 수 있게 함으로써 재생 위치를 특정 위치로 이동해줌
+                          videoController!.seekTo(
+                            Duration(seconds: val.toInt()),
+                          );
+                        },
+                        // 동영상 재생 위치(position)를 초 단위(inSeconds.toDouble())로 표현
+                        // position.inSeconds getter를 사용하면 현재 동영상이 실행되고 있는 위치를 받을 수 있음
+                        value: videoController!.value.position.inSeconds
+                            .toDouble(),
+                        min:
+                            0, // Slider 위젯의 min 값은 항상 0 -> 동영상의 시작은 항상 0초부터 시작하기 때문
+                        max: videoController!.value.duration.inSeconds
+                            .toDouble(), // Duration으로 동영상 전체 길이를 받아와 inSeconds으로 전체 길이를 초(seconds)로 변환
+                      ),
+                    ),
+                    renderTimeTextFromDuration(
+                      // 동영상 총 길이
+                      videoController!.value.duration,
+                    ),
+                  ],
+                ),
               ),
             ),
             // showControls가 true일 때만 아이콘 보여주기
@@ -173,6 +193,17 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
               ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget renderTimeTextFromDuration(Duration duration) {
+    // Duration값을 보기 편한 형태로 변환
+    // ${(duration.inSeconds % 60).toString().padLeft(2, '0')}에서 duration.inSeconds % 60 -> 60으로 나눈 나머지 값으로 0~59초까지 표현, padLeft(2, '0')는 0~9 값 일때 앞에 0을 붙여줌
+    return Text(
+      '${duration.inMinutes.toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}',
+      style: const TextStyle(
+        color: Colors.white,
       ),
     );
   }
