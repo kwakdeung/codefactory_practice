@@ -66,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Center(
       child: CustomVideoPlayer(
         video: video!, // 선택된 동영상 입력해주기
+        onNewVideoPressed: onNewVideoPressed,
       ),
     );
   }
