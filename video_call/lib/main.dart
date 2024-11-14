@@ -15,7 +15,7 @@ late List<CameraDescription> _cameras;
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       home: HomeScreen(),
     ),
   );

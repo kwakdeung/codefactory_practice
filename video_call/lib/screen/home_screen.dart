@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:video_call/screen/cam_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,9 +8,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue[100]!,
-      body: SafeArea(
+      // SafeArea - 자식 위젯에 패딩을 넣어서 디바이스 영역이 앱의 위젯 영역을 침범하는 것을 막아줌
+      body: const SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
               Expanded(child: _Logo()), // 로고
@@ -43,7 +45,7 @@ class _Logo extends StatelessWidget {
                 spreadRadius: 2.0, // 그림자 효과의 반경, 설정 값이 높을 수록 넓어짐
               ),
             ]),
-        child: Padding(
+        child: const Padding(
           padding: EdgeInsets.all(16.0),
           child: Row(
             mainAxisSize: MainAxisSize.min, // Row 주축 최소 크기,
@@ -95,8 +97,17 @@ class _EntryButton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ElevatedButton(
-          onPressed: () {},
-          child: Text('입장하기'),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const CamScreen(),
+              ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF2894f4),
+              foregroundColor: Colors.white),
+          child: const Text('입장하기'),
         ),
       ],
     );
