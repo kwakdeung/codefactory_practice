@@ -23,8 +23,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # asset:
-  #   - images/a_dot_burr.jpeg
+  asset:
+    - asset/img/
   #   - images/a_dot_ham.jpeg
 
   # fonts:

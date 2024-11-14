@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.video_call"
-    compileSdk flutter.compileSdkVersion
+    compileSdk 33 // 원본 flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
