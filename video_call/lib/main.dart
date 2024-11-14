@@ -1,15 +1,24 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:video_call/screen/home_screen.dart';
 
 late List<CameraDescription> _cameras;
 
 // Future, async, await: camera 패키지 사용으로 핸드폰에 있는 카메라들 가져오기 위해 비동기 사용
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
 
-  // 핸드폰에 있는 카메라들 가져오기
-  _cameras = await availableCameras();
-  runApp(const CameraApp());
+//   // 핸드폰에 있는 카메라들 가져오기
+//   _cameras = await availableCameras();
+//   runApp(const CameraApp());
+// }
+
+void main() {
+  runApp(
+    MaterialApp(
+      home: HomeScreen(),
+    ),
+  );
 }
 
 class CameraApp extends StatefulWidget {

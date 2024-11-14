@@ -23,7 +23,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  asset:
+
+  assets:
     - asset/img/
   #   - images/a_dot_ham.jpeg
 
