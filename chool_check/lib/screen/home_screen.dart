@@ -8,6 +8,11 @@ class HomeScreen extends StatelessWidget {
     37.5233273, // 위도
     126.921252, // 경도
   );
+  // 회사 위치 마커 선언
+  static const Marker marker = Marker(
+    markerId: MarkerId('company'),
+    position: companyLatLng,
+  );
 
   // renderAppBar() 함수 아래에 입력하기
   Future<String> checkPermission() async {
@@ -62,14 +67,15 @@ class HomeScreen extends StatelessWidget {
             return Column(
               children: [
                 // 2/3 만큼 공간 차지
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: GoogleMap(
                     // 지도 위치 지정
-                    initialCameraPosition: CameraPosition(
+                    initialCameraPosition: const CameraPosition(
                       target: companyLatLng,
                       zoom: 16, // 확대 정도 (값이 높을수록 크게 보임)
                     ),
+                    markers: Set.from([marker]),
                   ),
                 ),
                 // 1/3 만큼 공간 차지
