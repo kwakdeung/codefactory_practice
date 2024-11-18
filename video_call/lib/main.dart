@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:video_call/screen/home_screen.dart';
 
 late List<CameraDescription> _cameras;
@@ -13,7 +14,9 @@ late List<CameraDescription> _cameras;
 //   runApp(const CameraApp());
 // }
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   runApp(
     const MaterialApp(
       home: HomeScreen(),

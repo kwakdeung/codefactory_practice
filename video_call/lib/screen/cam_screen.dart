@@ -1,5 +1,6 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_call/const/agora.dart';
 
@@ -14,6 +15,9 @@ class _CamScreenState extends State<CamScreen> {
   RtcEngine? engine; // 아고라 엔진을 저장할 변수
   int? uid; // 내 ID
   int? otherUid; // 상대방 ID
+  String appId = dotenv.env["APP_ID"]!;
+  String channelName = dotenv.env["CHANNEL_NAME"]!;
+  String tempToken = dotenv.env["TEMP_TOKEN"]!;
 
   // 권한 관련 작업 모두 실행
   Future<bool> init() async {
@@ -38,9 +42,9 @@ class _CamScreenState extends State<CamScreen> {
       // 아고라 엔진을 초기화합니다.
       await engine!.initialize(
         // 초기화할 때 사용할 설정을 제공합니다.
-        const RtcEngineContext(
+        RtcEngineContext(
           // 미리 저장해둔 APP ID를 입력합니다.
-          appId: APP_ID,
+          appId: appId,
           // 라이브 동영상 송출에 최적화합니다.
           channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
         ),
@@ -88,8 +92,8 @@ class _CamScreenState extends State<CamScreen> {
       // 채널에 들어가기
       await engine!.joinChannel(
         // 채널 입장하기
-        token: TEMP_TOKEN,
-        channelId: CHANNEL_NAME,
+        token: tempToken,
+        channelId: channelName,
         // 영상과 관련된 여러 가지 설정을 할 수 있다.
         // 현재 프로젝트에는 불필요하다.
         uid: 0,
