@@ -198,8 +198,8 @@ class _CamScreenState extends State<CamScreen> {
         controller: VideoViewController.remote(
           rtcEngine: engine!,
           canvas: VideoCanvas(uid: otherUid),
-          connection: const RtcConnection(
-            channelId: CHANNEL_NAME,
+          connection: RtcConnection(
+            channelId: channelName,
           ),
         ),
       );
