@@ -13,6 +13,15 @@ class HomeScreen extends StatelessWidget {
     markerId: MarkerId('company'),
     position: companyLatLng,
   );
+  // 현재 위치 반경 표시
+  static final Circle circle = Circle(
+    circleId: const CircleId('choolCheckCircle'),
+    center: companyLatLng, // 원의 중심이 되는 위치. LatLng 값을 제공함.
+    fillColor: Colors.blue.withOpacity(0.5), // 원의 색상
+    radius: 100, // 원의 반지름(미터 단위)
+    strokeColor: Colors.blue, // 원의 테두리 색
+    strokeWidth: 1, // 원의 테두리 두께
+  );
 
   // renderAppBar() 함수 아래에 입력하기
   Future<String> checkPermission() async {
@@ -75,7 +84,8 @@ class HomeScreen extends StatelessWidget {
                       target: companyLatLng,
                       zoom: 16, // 확대 정도 (값이 높을수록 크게 보임)
                     ),
-                    markers: Set.from([marker]),
+                    markers: Set.from([marker]), // Set으로 Marker 제공
+                    circles: Set.from([circle]), // Set으로 Circle 제공
                   ),
                 ),
                 // 1/3 만큼 공간 차지
