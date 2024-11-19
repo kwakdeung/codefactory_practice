@@ -10,7 +10,9 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"            
+            android:requestLegacyExternalStorage="true">
+            <!-- android:requestLegacyExternalStorage="true" 안드로이드 11 버전 이전 운영체제 사용 시 기존 파일 저장소 사용할 때 추가 -->
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
                  while the Flutter UI initializes. After that, this theme continues
