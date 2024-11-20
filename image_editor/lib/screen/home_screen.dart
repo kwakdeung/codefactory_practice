@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:image_editor/component/footer.dart';
 import 'package:image_editor/component/main_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -21,15 +23,34 @@ class _HomeScreenState extends State<HomeScreen> {
         fit: StackFit.expand,
         children: [
           renderBody(),
-          MainAppBar(
-            onPickImage: onPickImage,
-            onSaveImage: onSaveImage,
-            onDeleteItem: onDeleteItem,
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: MainAppBar(
+              onPickImage: onPickImage,
+              onSaveImage: onSaveImage,
+              onDeleteItem: onDeleteItem,
+            ),
           ),
+          // image가 선택되면 Footer 위치하기
+          if (image != null)
+            Positioned(
+              // 맨 아래에 Footer 위젯 위치하기
+              bottom: 0,
+              // left, right가 0이면 좌우를 최대 크기로 차지함
+              left: 0,
+              right: 0,
+              child: Footer(
+                onEmoticonTap: onEmoticonTap,
+              ),
+            )
         ],
       ),
     );
   }
+
+  void onEmoticonTap(int index) {}
 
   Widget renderBody() {
     // 이미지가 null이 아닐 때

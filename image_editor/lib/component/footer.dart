@@ -22,7 +22,7 @@ class Footer extends StatelessWidget {
           children: List.generate(
             7,
             (index) => Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: GestureDetector(
                 onTap: () {
                   onEmoticonTap(index + 1); // 스티커 선택할 때 실행할 함수
