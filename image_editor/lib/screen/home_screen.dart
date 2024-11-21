@@ -81,34 +81,31 @@ class _HomeScreenState extends State<HomeScreen> {
       return RepaintBoundary(
         // 위젯을 이미지로 저장하는 데 사용
         key: imgKey,
-        // Stack 크기의 최대 크기만큼 차지하기
-        child: Positioned.fill(
-          // 위젯 확대 및 좌우 이동을 가능하게 하는 위젯
-          child: InteractiveViewer(
-            child: Stack(
-              fit: StackFit.expand, // 크기 최대로 늘려주기
-              children: [
-                Image.file(
-                  File(image!.path),
-                  // 이미지가 부모 위젯 크기 최대를 차지하도록 하기
-                  fit: BoxFit.cover,
-                ),
-                ...stickers.map(
-                  (sticker) => Center(
-                    // 최초 스티커 선택 시 중앙에 배치
-                    child: EmoticonSticker(
-                      key: ObjectKey(sticker.id),
-                      onTransform: () {
-                        onTransform(sticker.id);
-                      },
-                      imgPath: sticker.imgPath,
-                      isSelected: selectedId == sticker.id,
-                    ),
-                  ),
-                ),
-              ],
+        child: Stack(
+          fit: StackFit.expand, // Stack 크기의 최대 크기만큼 차지하기
+          children: [
+            // 위젯 확대 및 좌우 이동을 가능하게 하는 위젯
+            InteractiveViewer(
+              child: Image.file(
+                File(image!.path),
+                fit: BoxFit.cover, // 이미지가 부모 위젯 크기 최대를 차지하도록 하기
+              ),
             ),
-          ),
+            ...stickers.map(
+              (sticker) => Positioned(
+                left: 120, // 예시 좌표
+                top: 300, // 예시 좌표
+                child: EmoticonSticker(
+                  key: ObjectKey(sticker.id),
+                  onTransform: () {
+                    onTransform(sticker.id);
+                  },
+                  imgPath: sticker.imgPath,
+                  isSelected: selectedId == sticker.id,
+                ),
+              ),
+            ),
+          ],
         ),
       );
     } else {
