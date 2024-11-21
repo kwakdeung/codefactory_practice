@@ -127,7 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onSaveImage() {}
 
-  void onDeleteItem() {}
+  void onDeleteItem() async {
+    setState(() {
+      // .where - 조건을 필터링할 때 사용하는 함수
+      stickers = stickers.where((sticker) => sticker.id != selectedId).toSet();
+      // 현재 선택 되어 있는 스티커 삭제 후 Set로 변환
+    });
+  }
 
   void onTransform(String id) {
     // 스티커가 변형될 때마다 변형 중인
