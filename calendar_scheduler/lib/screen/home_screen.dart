@@ -1,6 +1,8 @@
 import 'package:calendar_scheduler/component/main_calendar.dart';
+import 'package:calendar_scheduler/component/schedule_bottom_sheet.dart';
 import 'package:calendar_scheduler/component/schedule_card.dart';
 import 'package:calendar_scheduler/component/today_banner.dart';
+import 'package:calendar_scheduler/const/colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,6 +41,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
+      ),
+      // 새 일정 버튼
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isDismissible: true, // 배경 탭했을 때 BottomSheet 닫기
+            builder: (_) => ScheduleBottomSheet(),
+          );
+        },
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        backgroundColor: PRIMARY_COLOR,
       ),
     );
   }
