@@ -52,16 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     return ListView.builder(
                       // 리스트에 입력할 값들의 총 개수
                       itemCount: snapshot.data!.length,
-                      // 현재 index에 해당되는 일정
                       itemBuilder: (context, index) {
+                        // 현재 index에 해당되는 일정
+                        final schedule = snapshot.data![index];
                         // 패딩 추가로 UI 개선
                         return Padding(
                           padding: const EdgeInsets.only(
                               bottom: 8.0, left: 8.0, right: 8.0),
                           child: ScheduleCard(
-                            startTime: 12,
-                            endTime: 14,
-                            content: '프로그래밍 공부',
+                            startTime: schedule.startTime,
+                            endTime: schedule.endTime,
+                            content: schedule.content,
                           ),
                         );
                       },
@@ -85,11 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
             isScrollControlled: true,
           );
         },
-        child: Icon(
+        backgroundColor: PRIMARY_COLOR,
+        child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
-        backgroundColor: PRIMARY_COLOR,
       ),
     );
   }

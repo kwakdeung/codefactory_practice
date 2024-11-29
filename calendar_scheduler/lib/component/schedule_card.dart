@@ -52,14 +52,13 @@ class _Time extends StatelessWidget {
   final int startTime; // 시작 시간
   final int endTime; // 끝 시간
   const _Time({
-    super.key,
     required this.startTime,
     required this.endTime,
   });
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextStyle(
+    const textStyle = TextStyle(
       fontWeight: FontWeight.w600,
       color: PRIMARY_COLOR,
       fontSize: 16.0,
