@@ -3,7 +3,9 @@ import 'package:calendar_scheduler/component/schedule_bottom_sheet.dart';
 import 'package:calendar_scheduler/component/schedule_card.dart';
 import 'package:calendar_scheduler/component/today_banner.dart';
 import 'package:calendar_scheduler/const/colors.dart';
+import 'package:calendar_scheduler/database/drift_database.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,10 +36,37 @@ class _HomeScreenState extends State<HomeScreen> {
             // 배너 추가하기
             TodayBanner(selectedDate: selectedDate, count: 0),
             const SizedBox(height: 8.0),
-            ScheduleCard(
-              startTime: 12,
-              endTime: 14,
-              content: '프로그래밍 공부',
+            // 남는 공간 모두 차지하기
+            Expanded(
+              // 일정 정보가 Stream으로 제공되기 때문에 StreamBuilder 사용
+              // StreamBuilder -> 일정 관련 데이터가 변경될 때마다 위젯들을 새로 렌더링해줌
+              child: StreamBuilder<List<Schedule>>(
+                  // watchSchedules() - Stream을 반환
+                  stream: GetIt.I<LocalDatabase>().watchSchedules(selectedDate),
+                  builder: (context, snapshot) {
+                    // 데이터가 없을 때
+                    if (!snapshot.hasData) {
+                      return Container();
+                    }
+                    // 화면에 보이는 값들만 렌더링하는 리스트
+                    return ListView.builder(
+                      // 리스트에 입력할 값들의 총 개수
+                      itemCount: snapshot.data!.length,
+                      // 현재 index에 해당되는 일정
+                      itemBuilder: (context, index) {
+                        // 패딩 추가로 UI 개선
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 8.0, left: 8.0, right: 8.0),
+                          child: ScheduleCard(
+                            startTime: 12,
+                            endTime: 14,
+                            content: '프로그래밍 공부',
+                          ),
+                        );
+                      },
+                    );
+                  }),
             ),
           ],
         ),
